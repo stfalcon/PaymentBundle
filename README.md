@@ -44,6 +44,6 @@ Update routing.yml
 
 ```yml
 StfalconPaymentBundle:
-    resource: "@StfalconPaymentBundle/Resources/config/routing/application.xml"
+    resource: "@StfalconPaymentBundle/Resources/config/routing/payment.xml"
     prefix:   /payment
 ```
