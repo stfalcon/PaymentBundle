@@ -33,8 +33,8 @@ class InterkassaPaymentController extends Controller
         $form = $this->createFormBuilder(null, array(
             'validation_constraint' => $collectionConstraint,
         ))
-            ->add('amount', 'text')
-            ->add('description', 'textarea')
+            ->add('amount', 'text', array('label' => 'stfalcon.payment.amount'))
+            ->add('description', 'textarea', array('label' => 'stfalcon.payment.description'))
             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {

@@ -1,0 +1,6 @@
+stfalcon:
+    payment:
+        amount: Amount
+        description: Description
+        create: Create payment
+        pay: Pay
