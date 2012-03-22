@@ -49,7 +49,7 @@ class PaymentEntityTest extends \PHPUnit_Framework_TestCase
         $amount = '547987.43';
         $payment = new Payment($amount);
         $this->assertFalse($payment->getAmount() === $amount);
-        $this->assertSame((float) $amount, $payment->getAmount());
+        $this->assertSame($amount, $payment->getAmount());
     }
 
     /**

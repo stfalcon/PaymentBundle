@@ -13,7 +13,7 @@ use Stfalcon\Bundle\PaymentBundle\Entity\InterkassaPayment;
 class PaymentControllerTest extends WebTestCase
 {
 
-    const ID_FORM_PAYMENT_NEW = 'payment_new';
+    const ID_FORM_PAYMENT_NEW = 'interkassa_payment_new';
     const ID_FORM_INTERKASSA = 'interkassa';
 
     public function testInterkassaPaymentStatusAction()
@@ -42,9 +42,9 @@ class PaymentControllerTest extends WebTestCase
     public function testCheckNewPaymentPageIsAvailable()
     {
         $client = self::createClient();
-        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('payment_new'));
+        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('interkassa_payment_new'));
         $this->assertTrue($client->getResponse()->isSuccessful(),
-                'Произошла ошибка при открытии страницы создания платежа (роутер "payment_new")');
+                'Произошла ошибка при открытии страницы создания платежа (роутер "interkassa_payment_new")');
 
         $this->assertEquals(1, $crawler->filter('form[id="' . self::ID_FORM_PAYMENT_NEW . '"]')->count(),
                 'Что-то не так с формой создания платежа (вероятно форма не найдена или она не одна)');
@@ -53,10 +53,10 @@ class PaymentControllerTest extends WebTestCase
     public function testSubmitInvalidDataOnNewPaymentPage()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('payment_new'));
+        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('interkassa_payment_new'));
 
         // заполняем и сабмитим форму
-        $paymentForm = $crawler->filter('form[id="payment_new"]')->form();
+        $paymentForm = $crawler->filter('form[id="interkassa_payment_new"]')->form();
         $paymentForm['form[amount]'] = 'string';
         $paymentForm['form[description]'] = '';
         $paymentFormCrawler = $client->submit($paymentForm)->filter('form[id="' . self::ID_FORM_PAYMENT_NEW . '"]');
@@ -71,9 +71,9 @@ class PaymentControllerTest extends WebTestCase
     public function testCheckInterkassaPayPageIsAvailable()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('payment_new'));
+        $crawler = $client->request('GET', $client->getKernel()->getContainer()->get('router')->generate('interkassa_payment_new'));
 
-        $paymentForm = $crawler->filter('form[id="payment_new"]')->form();
+        $paymentForm = $crawler->filter('form[id="interkassa_payment_new"]')->form();
         $paymentForm['form[amount]'] = PaymentEntityTest::PAYMENT_AMOUNT;
         $paymentForm['form[description]'] = PaymentEntityTest::PAYMENT_DESCRIPTION;
         $interkassaPageCrawler = $client->submit($paymentForm);

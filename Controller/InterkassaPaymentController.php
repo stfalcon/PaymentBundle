@@ -19,7 +19,6 @@ class InterkassaPaymentController extends Controller
     /**
      * Создать новый платеж
      *
-     * @Route("/payment/interkassa/new", name="payment_new")
      * @Template()
      */
     public function newAction()
@@ -56,7 +55,6 @@ class InterkassaPaymentController extends Controller
     /**
      * Форма отправки данных платежа к шлюзу
      *
-     * @Route("/payment/interkassa/pay")
      * @Template()
      */
     public function payAction(Payment $payment)
@@ -72,7 +70,6 @@ class InterkassaPaymentController extends Controller
     /**
      * Принимает ответ от шлюза
      *
-     * @Route("/payments/interkassa/status", name="interkassa_payment_status")
      * @Template()
      * @return array
      */
@@ -86,7 +83,7 @@ class InterkassaPaymentController extends Controller
                  ->findOneBy(array('id' => $statusData['ik_payment_id']));
 
         if (!$payment) {
-            $this->createNotFoundException('Платеж #' . $statusData['ik_payment_id'] . ' не найден в базе.');
+            $this->createNotFoundException('Payment #' . $statusData['ik_payment_id'] . ' not found in the database.');
         }
 
         $payment->markAsPaid($statusData, $settings['interkassa']['secret_key']);
