@@ -38,10 +38,10 @@ class PaymentEntityTest extends \PHPUnit_Framework_TestCase
 
     public function testSetIntDataToAmount()
     {
-        $amount = 547987;
+        $amount = 547987.23;
         $payment = new Payment($amount);
-        $this->assertFalse($payment->getAmount() === $amount);
-        $this->assertSame((float) $amount, $payment->getAmount());
+        $this->assertTrue($payment->getAmount() === $amount);
+        $this->assertSame($amount, $payment->getAmount());
     }
 
     public function testSetNumericStringToAmount()
