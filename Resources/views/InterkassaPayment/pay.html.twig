@@ -1,10 +1,10 @@
 <h3>Interkassa #{{ payment.id }}</h3>
 
 <p>
-    Description: "{{ payment.description }}"
+    {{ 'stfalcon.payment.description' | trans }}}: "{{ payment.description }}"
 </p>
 <p>
-    Amount: {{ payment.amount }}
+    {{ 'stfalcon.payment.amount' | trans }}}: {{ payment.amount }}
 </p>
 
 <form id="interkassa" action="http://www.interkassa.com/lib/payment.php" method="post" target="_top">
@@ -13,5 +13,5 @@
     <input type="hidden" name="ik_payment_id" value="{{ payment.id }}">
     <input type="hidden" name="ik_payment_desc" value="{{ payment.description }}">
     <input type="hidden" name="ik_paysystem_alias" value="">
-    <input type="submit" name="process" value="Pay">
+    <input type="submit" name="process" value="{{ 'stfalcon.payment.pay' | trans }}}">
 </form>

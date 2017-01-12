@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class InterkassaPayment extends Payment {
-
+class InterkassaPayment extends Payment
+{
     /**
      * Get hash string for payment
      *
@@ -29,11 +29,11 @@ class InterkassaPayment extends Payment {
             !array_key_exists('ik_currency_exch', $statusData) ||
             !array_key_exists('ik_fees_payer', $statusData)
         ) {
-            throw new \InvalidArgumentException('Отсутствует один или несколько обязательных параметров для генерации хэша.');
+            throw new \InvalidArgumentException('Missing one or more required parameters to generate the hash.');
         }
 
         if (!$secretKey) {
-            throw new \InvalidArgumentException('Отсутствует секретный ключ');
+            throw new \InvalidArgumentException('There is no secret key.');
         }
 
         return md5(
@@ -57,10 +57,10 @@ class InterkassaPayment extends Payment {
         $data['ik_payment_id'] = $this->getId();
 
         if ($statusData['ik_sign_hash'] != InterkassaPayment::getSignHash($data, $secretKey)) {
-            throw new \InvalidArgumentException('Проверка контрольной подписи данных о платеже провалена.');
+            throw new \InvalidArgumentException('Verifying the signature information about the payment failed.');
         }
 
-        $this->setStatus('paid');
+        $this->setStatus(parent::STATUS_PAID);
     }
 
 }

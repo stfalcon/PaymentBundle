@@ -1,0 +1,6 @@
+stfalcon:
+    payment:
+        amount: Сумма
+        description: Описание
+        create: Создать платеж
+        pay: Оплатить

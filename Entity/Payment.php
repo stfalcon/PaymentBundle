@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\MappedSuperclass
  */
-class Payment {
+class Payment
+{
 
     const STATUS_PENDING = 'pending';
     const STATUS_PAID = 'paid';
@@ -52,7 +53,8 @@ class Payment {
      * @param float $amount
      * @return float
      */
-    function __construct($amount = 0, $description = '') {
+    public function __construct($amount = 0, $description = '')
+    {
         $this->setAmount($amount);
         $this->setDescription($description);
         $this->setStatus(self::STATUS_PENDING);
@@ -65,7 +67,7 @@ class Payment {
         }
 
         if ($this->id) {
-            throw new \Exception('Id этого платежа уже задан.');
+            throw new \Exception('Id this payment has already been set.');
         }
 
         $this->id = $id;
@@ -86,21 +88,9 @@ class Payment {
      *
      * @return float
      */
-    public function getAmount() {
-        return (float) $this->amount;
-    }
-
-    /**
-     * Set payment amount
-     *
-     * @param float $amount
-     * @return void
-     */
-    private function setAmount($amount) {
-        if (!is_numeric($amount)) {
-            throw new \InvalidArgumentException('Payment amount should be a number');
-        }
-        $this->amount = $amount;
+    public function getAmount()
+    {
+        return $this->amount;
     }
 
     /**
@@ -108,20 +98,9 @@ class Payment {
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return (string) $this->description;
-    }
-
-    /**
-     * Set payment description
-     *
-     * @param string $description
-     */
-    private function setDescription($description) {
-        if (!is_string($description)) {
-            throw new \InvalidArgumentException('Payment sedcription should be a string');
-        }
-        $this->description = $description;
     }
 
     /**
@@ -129,17 +108,9 @@ class Payment {
      *
      * @return string
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
-    }
-
-    /**
-     * Set payment status
-     *
-     * @param string $status
-     */
-    protected function setStatus($status) {
-        $this->status = $status;
     }
 
     /**
@@ -152,4 +123,40 @@ class Payment {
         return ($this->getStatus() == self::STATUS_PENDING);
     }
 
+    /**
+     * Set payment status
+     *
+     * @param string $status
+     */
+    protected function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Set payment amount
+     *
+     * @param float $amount
+     * @return void
+     */
+    private function setAmount($amount)
+    {
+        if (!is_numeric($amount)) {
+            throw new \InvalidArgumentException('Payment amount should be a number');
+        }
+        $this->amount = $amount;
+    }
+
+    /**
+     * Set payment description
+     *
+     * @param string $description
+     */
+    private function setDescription($description)
+    {
+        if (!is_string($description)) {
+            throw new \InvalidArgumentException('Payment sedcription should be a string');
+        }
+        $this->description = $description;
+    }
 }
